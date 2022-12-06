@@ -1,7 +1,7 @@
 DevApp:
   app: devsecops
   replicas: 2
-  image: ${imageName}
+  image: ''
   containers:
     name: devsecops-container
 
