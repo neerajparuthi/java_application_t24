@@ -46,7 +46,6 @@ pipeline {
     deploymentName = "devsecops"
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
-    app_version = "${GIT_COMMIT}"
     imageName = "docker4028/numeric-app:${GIT_COMMIT}"
     applicationURL="http://java-spring-devsecops.eastus.cloudapp.azure.com"
     applicationURI="/increment/99"
@@ -113,8 +112,8 @@ pipeline {
      stage('Installing helm chart') {
         steps{
           sh 'printenv'
-          sh 'sudo helm install --set DevApp.image=$imageName demoapp$app_version custom_helm_chart --dry-run'
-          sh 'sudo helm install --set DevApp.image=$imageName demoapp$app_version custom_helm_chart'
+          sh 'sudo helm install --set DevApp.image=$imageName demoapp custom_helm_chart --dry-run'
+          sh 'sudo helm install --set DevApp.image=$imageName demoapp custom_helm_chart'
         }
      }
 
