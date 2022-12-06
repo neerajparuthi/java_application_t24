@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.DevApp.app }}
+  name: {{ .Values.DevApp.app }}
+spec:
+  replicas: {{ .Values.DevApp.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.DevApp.app }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.DevApp.app }}
+    spec:
+      volumes:
+      - name: vol
+        emptyDir: {}
+      serviceAccountName: default
+      containers:
+      - image: {{ .Values.DevApp.image }}
+        name: {{ .Values.DevApp.containers.name }}
+        volumeMounts:
+        - mountPath: {{ .Values.Volume.mountPath }}
+          name: {{ .Values.Volume.name }}
+        securityContext:
+          runAsNonRoot: {{ .Values.SecurityContext.runAsNonRoot }}
+          runAsUser: {{ .Values.SecurityContext.runAsUser }}
+          readOnlyRootFilesystem: {{ .Values.SecurityContext.readOnlyRootFilesystem }}
+

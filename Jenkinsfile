@@ -124,6 +124,13 @@ pipeline {
        }
      }
 
+     stage('Installing helm chart') {
+        steps{
+          sh 'printenv'
+          sh 'helm install demoapp custom_helm_chart'
+        }
+     }
+
     //  stage('Vulnerability Scan - Kubernetes') {
     //    steps {
     //      parallel(
