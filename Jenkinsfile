@@ -46,7 +46,7 @@ pipeline {
     deploymentName = "devsecops"
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
-    app_version = ${GIT_COMMIT}
+    app_version = "${GIT_COMMIT}"
     imageName = "docker4028/numeric-app:${GIT_COMMIT}"
     applicationURL="http://java-spring-devsecops.eastus.cloudapp.azure.com"
     applicationURI="/increment/99"
