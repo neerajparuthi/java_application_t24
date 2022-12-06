@@ -1,7 +1,7 @@
 DevApp:
   app: devsecops
   replicas: 2
-  image: docker4028/numeric-app:$GITHUB_SHA
+  image: ${imageName}
   containers:
     name: devsecops-container
 
