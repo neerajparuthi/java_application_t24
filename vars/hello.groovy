@@ -1,5 +1,5 @@
-def call(String name, String city) {
+def call(Map config= [:]) {
  echo "hello Neeraj!"
- pwd
- echo "Welcome $name, to my city $city"
+ echo pwd
+ echo "Welcome ${config.name}, to my city ${config.city}"
 }
