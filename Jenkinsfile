@@ -63,21 +63,21 @@ pipeline {
        }
      }
 
-    //  stage('Unit Tests - JUnit and JaCoCo') {
-    //    steps {
-    //      withEnv(["PATH+MAVEN=${tool 'maven-coe'}/bin"] ) {
-		// 		sh "mvn test"
-    //     }
-    //    }
-    //  }
+     stage('Unit Tests - JUnit and JaCoCo') {
+       steps {
+         withEnv(["PATH+MAVEN=${tool 'maven-coe'}/bin"] ) {
+				sh "mvn test"
+        }
+       }
+     }
 
-    //  stage('Mutation Tests - PIT') {
-    //    steps {
-    //      withEnv(["PATH+MAVEN=${tool 'maven-coe'}/bin"] ) {
-		// 		sh "mvn org.pitest:pitest-maven:mutationCoverage"
-    //     }
-    //    }
-    //  }
+     stage('Mutation Tests - PIT') {
+       steps {
+         withEnv(["PATH+MAVEN=${tool 'maven-coe'}/bin"] ) {
+				sh "mvn org.pitest:pitest-maven:mutationCoverage"
+        }
+       }
+     }
 
      /*stage('SonarQube - SAST') {
        steps {
@@ -96,23 +96,8 @@ pipeline {
        }
      }*/
 
-	//  stage('Vulnerability Scan - Docker') {
-  //     steps {
-  //        parallel(
-  //        	/*"Dependency Scan": {
-  //               withEnv(["PATH+MAVEN=${tool 'maven-coe'}/bin"] ) {
-	// 			  sh "mvn dependency-check:check"
-  //               }
-	//  		},*/
-	//  		"Trivy Scan":{
-	//  			sh "bash trivy-docker-image-scan.sh"
-	//  		},
-	//  		"OPA Conftest":{
-	//  			sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-docker-security.rego Dockerfile'
-	//  		}   	
-  //     	)
-  //      }
-  //    }
+
+
     
 
      stage('Docker Build and Push') {
