@@ -1,0 +1,22 @@
+DevApp:
+  app: devsecops
+  replicas: 2
+  image: docker4028/numeric-app:$GITHUB_SHA
+  containers:
+    name: devsecops-container
+
+Volume:
+  mountPath: /tmp
+  name: vol
+
+SecurityContext:
+  runAsNonRoot: true
+  runAsUser: 100
+  readOnlyRootFilesystem: true
+
+Service:
+  name: devsecops-svc
+  port: 8080
+  protocol: TCP
+  targetPort: 8080
+  type: NodePort
