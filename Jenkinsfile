@@ -95,10 +95,6 @@ pipeline {
        }
      }*/
 
-
-
-    
-
      stage('Docker Build and Push') {
        steps {
          withDockerRegistry([credentialsId: "dockerhubcreds", url: ""]) {
@@ -107,14 +103,6 @@ pipeline {
            sh 'docker push docker4028/numeric-app:""$GIT_COMMIT""'
          }
        }
-     }
-
-     stage('Installing helm chart') {
-        steps{
-          sh 'printenv'
-          sh 'sudo helm install --set DevApp.image=$imageName demoapp custom_helm_chart --dry-run'
-          sh 'sudo helm install --set DevApp.image=$imageName demoapp custom_helm_chart'
-        }
      }
 
      stage('Vulnerability Scan - Kubernetes') {
@@ -131,6 +119,14 @@ pipeline {
            }
          )
        }
+     }
+
+     stage('Installing helm chart') {
+        steps{
+          sh 'printenv'
+          sh 'sudo helm install --set DevApp.image=$imageName demoapp custom_helm_chart --dry-run'
+          sh 'sudo helm install --set DevApp.image=$imageName demoapp custom_helm_chart'
+        }
      }
 
     //  stage('K8S Deployment - DEV') {
