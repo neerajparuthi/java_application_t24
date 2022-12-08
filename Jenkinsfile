@@ -1,4 +1,5 @@
 //@Library('t24-jenkins-shared-libraries') _
+@Library('shared_lib') _
 
 
 /////// ******************************* Code for fectching Failed Stage Name ******************************* ///////
