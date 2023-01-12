@@ -21,3 +21,9 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerHubSvcCon'
+    repository: 'docker4028'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
