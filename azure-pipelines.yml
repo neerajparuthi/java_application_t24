@@ -28,6 +28,7 @@ steps:
     goals: 'package'
 
 - task: Docker@2
+  displayName: 'Docker image build/push'
   inputs:
     containerRegistry: 'dockerhub-AZ'
     repository: 'docker4028/numeric-app'
