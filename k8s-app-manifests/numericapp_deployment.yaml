@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: numericappk8s
-        image: "docker4028/numeric-app:80"
+        image: "docker4028/numeric-app:__buildid__"
         #image: "nginx"
         ports:
         - name: testing-port
