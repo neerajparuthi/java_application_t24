@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- main
+- none
 
 pool:
   name: "Self Hosted Pool"
@@ -21,3 +21,24 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerhub-AZ'
+    repository: 'docker4028/numeric-app'
+    command: 'buildandpush'
+    Dockerfile: 'Dockerfile'
+    tags: $(Build.BuildId)
+  
+
+- task: KubernetesManifest@0
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'k8s-az-con'
+    namespace: 'dev-fargate'
+    #namespace: 'default'
+    manifests: |
+      k8s-app-manifests/numericapp_deployment.yaml
+      k8s-app-manifests/numericapp_svc.yaml
+    #imagePullSecrets: 'dockerregcredsaz'
+    imagePullSecrets: 'dokrregdevops'
