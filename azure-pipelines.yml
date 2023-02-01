@@ -26,31 +26,31 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'pom'
+    # mavenAuthenticateFeed: false
+    # effectivePomSkip: false
+    # sonarQubeRunAnalysis: true
+    # sqMavenPluginVersionChoice: 'pom'
 
 
-- task: SonarQubePrepare@5
-  inputs:
-    SonarQube: 'sonar-az-con'
-    scannerMode: 'Other'
-    extraProperties: |
-      # Additional properties that will be passed to the scanner, 
-      # Put one key=value per line, example:
-      # sonar.exclusions=**/*.bin
-      sonar.projectKey=java_application_t24_az
-      sonar.projectName=java_application_t24_az
-      sonar.sources=src
-      sonar.java.binaries=target/classes/ 
-      sonar.exclusions=src/test/java/****/*.java
-      sonar.projectVersion=1
+# - task: SonarQubePrepare@5
+#   inputs:
+#     SonarQube: 'sonar-az-con'
+#     scannerMode: 'Other'
+#     extraProperties: |
+#       # Additional properties that will be passed to the scanner, 
+#       # Put one key=value per line, example:
+#       # sonar.exclusions=**/*.bin
+#       sonar.projectKey=java_application_t24_az
+#       sonar.projectName=java_application_t24_az
+#       sonar.sources=src
+#       sonar.java.binaries=target/classes/ 
+#       sonar.exclusions=src/test/java/****/*.java
+#       sonar.projectVersion=1
 
-- task: SonarQubeAnalyze@5
-- task: SonarQubePublish@5
-  inputs:
-    pollingTimeoutSec: '300'
+# - task: SonarQubeAnalyze@5
+# - task: SonarQubePublish@5
+#   inputs:
+#     pollingTimeoutSec: '300'
 
 - task: Docker@2
   displayName: 'Docker image build/push'
