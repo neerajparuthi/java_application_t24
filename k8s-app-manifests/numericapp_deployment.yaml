@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: numericapp-deployment
+  namespace: dev-fargate
+  labels:
+    infrastructure: fargate
+    app: numericapp
+spec:
+  selector:
+    matchLabels:
+      infrastructure: fargate
+      app: numericapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        infrastructure: fargate
+        app: numericapp
+    spec:
+      containers:
+      - name: numericappk8s
+        image: "docker4028/numeric-app:80"
+        #image: "nginx"
+        ports:
+        - name: testing-port
+          containerPort: 8080
+        env:
+        - name: "PORT"
+          value: "80"
