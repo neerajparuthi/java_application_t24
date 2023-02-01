@@ -13,7 +13,7 @@ pool:
 variables:
 - group: pipeline_vars
 - name: image-tag
-  value: $(Build.BuildNumber)
+  value: $(Build.BuildId)
 
 steps:
 - task: Maven@3
@@ -46,8 +46,9 @@ steps:
       echo 'Image tag is $(image-tag)'
 
 - task: replacetokens@5
+  displayName: 'Feeding dynamic variable values in Manifest file'
   inputs:
-    rootDirectory: '$(Pipeline.Workspace)/k8s-app-manifests/'
+    rootDirectory: 'k8s-app-manifests/'
     targetFiles: 'numericapp_deployment.yaml'
     encoding: 'auto'
     tokenPattern: 'custom'
