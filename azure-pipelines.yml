@@ -10,6 +10,9 @@ pool:
   name: "Self Hosted Pool"
   #vmImage: ubuntu-latest
 
+variables:
+- group: pipeline_vars
+
 steps:
 - task: Maven@3
   inputs:
