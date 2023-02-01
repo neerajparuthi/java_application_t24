@@ -12,6 +12,8 @@ pool:
 
 variables:
 - group: pipeline_vars
+- name: image-tag
+  value: $(Build.BuildNumber)
 
 steps:
 - task: Maven@3
@@ -31,9 +33,17 @@ steps:
     repository: 'docker4028/numeric-app'
     command: 'buildandpush'
     Dockerfile: 'Dockerfile'
-    tags: $(Build.BuildId)
+    tags: $(image-tag)
   
-
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello world'
+      echo 'Current build id is $(buildid)'
+      echo 'Image tag is $(image-tag)'
 - task: KubernetesManifest@0
   inputs:
     action: 'deploy'
