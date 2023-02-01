@@ -45,7 +45,22 @@ steps:
       echo 'Current build id is $(buildid)'
       echo 'Image tag is $(image-tag)'
 
-
+- task: replacetokens@5
+  inputs:
+    rootDirectory: '$(Pipeline.Workspace)/k8s-app-manifests/'
+    targetFiles: 'numericapp_deployment.yaml'
+    encoding: 'auto'
+    tokenPattern: 'custom'
+    tokenPrefix: '__'
+    tokenSuffix: '__'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    actionOnNoFiles: 'continue'
+    enableTransforms: false
+    enableRecursion: false
+    useLegacyPattern: false
+    enableTelemetry: true
 
 - task: KubernetesManifest@0
   inputs:
