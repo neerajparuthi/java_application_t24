@@ -44,6 +44,9 @@ steps:
       echo 'Hello world'
       echo 'Current build id is $(buildid)'
       echo 'Image tag is $(image-tag)'
+
+
+
 - task: KubernetesManifest@0
   inputs:
     action: 'deploy'
