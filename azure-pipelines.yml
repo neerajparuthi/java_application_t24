@@ -7,9 +7,9 @@ trigger:
 - none
 
 pool:
-  name: "Self Hosted Pool"
+  #name: "Self Hosted Pool"
   #name: "docker_pool"
-  #vmImage: ubuntu-latest
+  vmImage: ubuntu-latest
 
 variables:
 - group: pipeline_vars
@@ -34,20 +34,20 @@ steps:
       sonar.projectVersion=1
 
 
-# - task: JavaToolInstaller@0
-#   inputs:
-#     versionSpec: '11'
-#     jdkArchitectureOption: 'x64'
-#     jdkSourceOption: 'PreInstalled'
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
 
 
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
-    #javaHomeOption: 'JDKVersion'
-    #jdkVersionOption: '1.9'
-    #jdkArchitectureOption: 'x64'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.9'
+    jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
