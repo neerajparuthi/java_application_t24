@@ -42,7 +42,7 @@ steps:
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
       sonar.projectKey=CGDevSecOps_CGDevSecOps_AYYNTjUWFzqEK_cmvPCU
-      sonar.projectName=CGDevSecOps
+      sonar.projectName=numeric
 
 # - task: JavaToolInstaller@0
 #   inputs:
