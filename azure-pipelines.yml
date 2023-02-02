@@ -44,11 +44,11 @@ steps:
       sonar.projectKey=CGDevSecOps_CGDevSecOps_AYYNTjUWFzqEK_cmvPCU
       sonar.projectName=CGDevSecOps
 
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '11'
-    jdkArchitectureOption: 'x64'
-    jdkSourceOption: 'PreInstalled'
+# - task: JavaToolInstaller@0
+#   inputs:
+#     versionSpec: '11'
+#     jdkArchitectureOption: 'x64'
+#     jdkSourceOption: 'PreInstalled'
 
 # - task: Maven@3
 #   inputs:
