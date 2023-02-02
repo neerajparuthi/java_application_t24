@@ -12,7 +12,7 @@
 	<groupId>com.devsecops</groupId>
 	<artifactId>numeric</artifactId>
 	<version>0.0.1</version>
-	<name>numeric</name>
+	<name>CGDevSecOps</name>
 	<description>Java Spring DevSecOps</description>
 
 	<properties>
