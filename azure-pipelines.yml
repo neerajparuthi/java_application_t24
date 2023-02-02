@@ -7,8 +7,11 @@ trigger:
 - none
 
 pool:
-  #name: "Self Hosted Pool"
-  vmImage: ubuntu-latest
+  name: "Self Hosted Pool"
+  demands:
+    - agent.name -equals self_hosted_dockeragent
+
+  #vmImage: ubuntu-latest
 
 variables:
 - group: pipeline_vars
@@ -82,51 +85,51 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-# - task: Docker@2
-#   displayName: 'Docker image build/push'
-#   inputs:
-#     containerRegistry: 'dockerhub-AZ'
-#     repository: 'docker4028/numeric-app'
-#     command: 'buildandpush'
-#     Dockerfile: 'Dockerfile'
-#     tags: $(image-tag)
+- task: Docker@2
+  displayName: 'Docker image build/push'
+  inputs:
+    containerRegistry: 'dockerhub-AZ'
+    repository: 'docker4028/numeric-app'
+    command: 'buildandpush'
+    Dockerfile: 'Dockerfile'
+    tags: $(image-tag)
   
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       # Write your commands here
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
       
-#       echo 'Hello world'
-#       echo 'Current build id is $(buildid)'
-#       echo 'Image tag is $(image-tag)'
+      echo 'Hello world'
+      echo 'Current build id is $(buildid)'
+      echo 'Image tag is $(image-tag)'
 
-# - task: replacetokens@5
-#   displayName: 'Feeding dynamic variable values in Manifest file'
-#   inputs:
-#     rootDirectory: 'k8s-app-manifests/'
-#     targetFiles: 'numericapp_deployment.yaml'
-#     encoding: 'auto'
-#     tokenPattern: 'custom'
-#     tokenPrefix: '__'
-#     tokenSuffix: '__'
-#     writeBOM: true
-#     actionOnMissing: 'warn'
-#     keepToken: false
-#     actionOnNoFiles: 'continue'
-#     enableTransforms: false
-#     enableRecursion: false
-#     useLegacyPattern: false
-#     enableTelemetry: true
+- task: replacetokens@5
+  displayName: 'Feeding dynamic variable values in Manifest file'
+  inputs:
+    rootDirectory: 'k8s-app-manifests/'
+    targetFiles: 'numericapp_deployment.yaml'
+    encoding: 'auto'
+    tokenPattern: 'custom'
+    tokenPrefix: '__'
+    tokenSuffix: '__'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    actionOnNoFiles: 'continue'
+    enableTransforms: false
+    enableRecursion: false
+    useLegacyPattern: false
+    enableTelemetry: true
 
-# - task: KubernetesManifest@0
-#   inputs:
-#     action: 'deploy'
-#     kubernetesServiceConnection: 'k8s-az-con'
-#     namespace: 'dev-fargate'
-#     #namespace: 'default'
-#     manifests: |
-#       k8s-app-manifests/numericapp_deployment.yaml
-#       k8s-app-manifests/numericapp_svc.yaml
-#     #imagePullSecrets: 'dockerregcredsaz'
-#     imagePullSecrets: 'dokrregdevops'
+- task: KubernetesManifest@0
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'k8s-az-con'
+    namespace: 'dev-fargate'
+    #namespace: 'default'
+    manifests: |
+      k8s-app-manifests/numericapp_deployment.yaml
+      k8s-app-manifests/numericapp_svc.yaml
+    #imagePullSecrets: 'dockerregcredsaz'
+    imagePullSecrets: 'dokrregdevops'
