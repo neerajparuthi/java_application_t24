@@ -8,8 +8,8 @@ trigger:
 
 pool:
   name: "Self Hosted Pool"
-  demands:
-    - Agent.Name -equals self_hosted_dockeragent
+  # demands:
+  #   - Agent.Name -equals self_hosted_dockeragent
 
   #vmImage: ubuntu-latest
 
