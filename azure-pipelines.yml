@@ -33,16 +33,6 @@ steps:
 #       sonar.exclusions=src/test/java/****/*.java
 #       sonar.projectVersion=1
 
-- task: SonarQubePrepare@5
-  inputs:
-    SonarQube: 'sonar-az-con'
-    scannerMode: 'Other'
-    extraProperties: |
-      # Additional properties that will be passed to the scanner,
-      # Put one key=value per line, example:
-      # sonar.exclusions=**/*.bin
-      sonar.projectKey=CGDevSecOps_CGDevSecOps_AYYNTjUWFzqEK_cmvPCU
-      sonar.projectName=numeric
 
 # - task: JavaToolInstaller@0
 #   inputs:
@@ -77,13 +67,12 @@ steps:
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
+ 
     
 
-- task: SonarQubePublish@5
-  inputs:
-    pollingTimeoutSec: '300'
+# - task: SonarQubePublish@5
+#   inputs:
+#     pollingTimeoutSec: '300'
 
 - task: Docker@2
   displayName: 'Docker image build/push'
